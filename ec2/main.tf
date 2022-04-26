@@ -6,7 +6,7 @@ terraform {
     profile = "lu-vumc-devops"
   }
 
-  required_version = ">= 0.14.0, < 0.16.0"
+  required_version = ">= 1.1.8"
 
   required_providers {
     aws = {
@@ -37,6 +37,7 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+# This is a comment
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
