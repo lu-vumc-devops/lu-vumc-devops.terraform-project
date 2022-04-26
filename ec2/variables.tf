@@ -7,15 +7,15 @@ variable "profile" {
 }
 
 variable "tags" {
-    type = map
-    default = {
-        Name = "HelloWorld"
-        Environment = "Development"
-        Product = "Website"
-    }
+  type = map(any)
+  default = {
+    Name        = "HelloWorld"
+    Environment = "Development"
+    Product     = "Website"
+  }
 }
 
 variable "instance_type" {
-  type = string
+  type    = string
   default = "t3.micro"
 }
