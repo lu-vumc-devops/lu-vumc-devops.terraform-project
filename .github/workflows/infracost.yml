@@ -1,5 +1,5 @@
 name: Infracost
-on: push
+on: [pull_request]
 
 jobs:
   slack:
@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - dir: init
           - dir: ec2
 
     steps:
