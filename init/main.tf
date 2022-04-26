@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket  = "297364695525-infrastructure"
+    bucket  = "952122846739-infrastructure"
     key     = "init/terraform.tfstate"
     region  = "us-west-2"
     profile = "lu-vumc-devops"
@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 module "init" {
-  source = "git@github.com:lu-vumc-devops/lu-vumc-devops.terraform-modules//modules/aws-account-init?ref=master"
+  source = "git@github.com:lu-vumc-devops/lu-vumc-devops.terraform-modules//modules/aws-account-init?ref=main"
 
   namespace     = "lu-vumc-devops"
   name          = "terraform"
