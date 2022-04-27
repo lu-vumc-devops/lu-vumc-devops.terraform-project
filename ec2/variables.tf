@@ -17,5 +17,5 @@ variable "tags" {
 
 variable "instance_type" {
   type    = string
-  default = "t3.small"
+  default = "t3.medium"
 }
