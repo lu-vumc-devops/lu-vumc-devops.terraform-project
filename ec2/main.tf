@@ -45,3 +45,4 @@ resource "aws_instance" "web" {
 }
 
 # This is a comment
+# This is a cloud cost automation test!
