@@ -6,11 +6,6 @@ terraform {
     profile = "lu-vumc-devops"
   }
 
-
-
-
-
-     
   required_version = ">= 1.1.8"
 
   required_providers {
