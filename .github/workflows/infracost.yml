@@ -1,5 +1,5 @@
 name: Infracost
-on: [push]
+on: [pull-request]
 
 jobs:
   slack:
