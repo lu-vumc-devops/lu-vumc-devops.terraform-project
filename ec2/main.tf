@@ -43,3 +43,5 @@ resource "aws_instance" "web" {
 
   tags = var.tags
 }
+
+# This is a comment
