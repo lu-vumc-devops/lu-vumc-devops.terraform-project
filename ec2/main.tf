@@ -1,18 +1,9 @@
 terraform {
   backend "s3" {
     bucket  = "952122846739-infrastructure"
-    key     = "init/terraform.tfstate"
+    key     = "services/ec2/terraform.tfstate"
     region  = "us-west-2"
     profile = "lu-vumc-devops"
-  }
-
-  required_version = ">= 1.1.8"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.73.0"
-    }
   }
 }
 
@@ -43,5 +34,3 @@ resource "aws_instance" "web" {
 
   tags = var.tags
 }
-
-# This is a comment
