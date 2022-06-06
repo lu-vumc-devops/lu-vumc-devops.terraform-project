@@ -1,8 +1,11 @@
 resource "aws_instance" "web" {
-  ami                         = var.ami
-  instance_type               = var.instance_type
-  subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = [aws_security_group.allow_http_https.id]
+  ami           = var.ami
+  instance_type = var.instance_type
+  subnet_id     = var.subnet_id
+  vpc_security_group_ids = [
+    aws_security_group.allow_http_https.id,
+    aws_security_group.allow_ssh.id
+  ]
   associate_public_ip_address = true
   iam_instance_profile        = aws_iam_instance_profile.ec2_iam_role_instance_profile.id
   user_data                   = var.user_data
@@ -46,7 +49,7 @@ resource "aws_security_group" "allow_http_https" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "HTTPS from VPC"
+    description = "HTTPS from Internet"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
@@ -54,9 +57,33 @@ resource "aws_security_group" "allow_http_https" {
   }
 
   ingress {
-    description = "HTTP from VPC"
+    description = "HTTP from Internet"
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.cidr_block]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = var.tags
+}
+
+resource "aws_security_group" "allow_ssh" {
+  name        = "allow_ssh"
+  description = "Allow SSH inbound traffic"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "SSH from Internet"
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = [var.cidr_block]
   }

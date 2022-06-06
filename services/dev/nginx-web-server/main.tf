@@ -37,7 +37,7 @@ module "ec2" {
   cidr_block    = "0.0.0.0/0"
   subnet_id     = data.terraform_remote_state.vpc.outputs.public_subnet_id
   instance_type = "t3.micro"
-  ami           = "ami-0ca285d4c2cda3300"
+  ami           = "ami-0ca285d4c2cda3300" # Amazon Linux 2 Kernel 5.10 AMI 2.0.20220426.0 x86_64 HVM gp2
   user_data     = <<EOF
 #!/bin/bash
 sudo yum update -y
