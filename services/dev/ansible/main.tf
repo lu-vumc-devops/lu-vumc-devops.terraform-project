@@ -72,6 +72,7 @@ module "ansible_slave_1" {
   cidr_block = "0.0.0.0/0"
   subnet_id  = data.terraform_remote_state.vpc.outputs.public_subnet_id
   vpc_security_group_ids = [
+    data.terraform_remote_state.vpc.outputs.sg_allow_http_https_id,
     data.terraform_remote_state.vpc.outputs.sg_allow_ssh_id
   ]
   instance_type        = "t3.micro"
@@ -93,6 +94,7 @@ module "ansible_slave_2" {
   cidr_block = "0.0.0.0/0"
   subnet_id  = data.terraform_remote_state.vpc.outputs.public_subnet_id
   vpc_security_group_ids = [
+    data.terraform_remote_state.vpc.outputs.sg_allow_http_https_id,
     data.terraform_remote_state.vpc.outputs.sg_allow_ssh_id
   ]
   instance_type        = "t3.micro"
