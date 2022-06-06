@@ -21,13 +21,13 @@ locals {
 }
 
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "../../../modules/vpc"
 
   tags = local.tags
 }
 
 module "ec2" {
-  source = "../../modules/ec2"
+  source = "../../../modules/ec2"
 
   tags = local.tags
 }
