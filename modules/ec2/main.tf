@@ -1,5 +1,5 @@
 resource "aws_instance" "web" {
-  ami                         = "ami-0ca285d4c2cda3300"
+  ami                         = var.ami
   instance_type               = var.instance_type
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [aws_security_group.allow_http_https.id]
