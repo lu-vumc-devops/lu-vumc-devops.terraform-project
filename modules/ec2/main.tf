@@ -1,17 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket  = "952122846739-infrastructure"
-    key     = "services/ec2/terraform.tfstate"
-    region  = "us-west-2"
-    profile = "lu-vumc-devops"
-  }
-}
-
-provider "aws" {
-  region  = var.region
-  profile = var.profile
-}
-
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -31,6 +17,8 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
+
+  subnet_id = var.subnet_id
 
   tags = var.tags
 }
