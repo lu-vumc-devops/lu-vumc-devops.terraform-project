@@ -20,20 +20,24 @@ locals {
   }
 }
 
-module "vpc" {
-  source = "../../../modules/vpc"
-
-  tags = local.tags
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket  = "952122846739-infrastructure"
+    region  = "us-west-2"
+    profile = "lu-vumc-devops"
+    key     = "services/dev/vpc/terraform.tfstate"
+  }
 }
 
 module "ec2" {
   source = "../../../modules/ec2"
 
-  vpc_id        = module.vpc.vpc_id
+  vpc_id        = data.terraform_remote_state.vpc.outputs.vpc_id
   cidr_block    = "0.0.0.0/0"
-  subnet_id     = module.vpc.public_subnet_id
+  subnet_id     = data.terraform_remote_state.vpc.outputs.public_subnet_id
   instance_type = "t3.micro"
-  user_data = <<EOF
+  user_data     = <<EOF
 #!/bin/bash
 sudo yum update -y
 sudo amazon-linux-extras install nginx1 -y
