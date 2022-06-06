@@ -5,13 +5,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids      = [aws_security_group.allow_http_https.id]
   associate_public_ip_address = true
 
-  user_data = <<EOF
-#!/bin/bash
-sudo yum update -y
-sudo amazon-linux-extras install nginx1 -y
-sudo systemctl enable nginx
-sudo systemctl start nginx
-EOF
+  user_data = var.user_data
 
   tags = var.tags
 }

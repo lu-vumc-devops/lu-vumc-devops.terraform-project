@@ -33,6 +33,13 @@ module "ec2" {
   cidr_block    = "0.0.0.0/0"
   subnet_id     = module.vpc.public_subnet_id
   instance_type = "t3.micro"
+  user_data = <<EOF
+#!/bin/bash
+sudo yum update -y
+sudo amazon-linux-extras install nginx1 -y
+sudo systemctl enable nginx
+sudo systemctl start nginx
+EOF
 
   tags = local.tags
 }
