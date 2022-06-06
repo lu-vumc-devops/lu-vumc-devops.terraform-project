@@ -6,4 +6,6 @@ variable "instance_type" {}
 variable "iam_instance_profile" {}
 variable "vpc_security_group_ids" {}
 variable "ami" {}
-variable "user_data" {}
+variable "user_data" {
+    default = ""
+}
