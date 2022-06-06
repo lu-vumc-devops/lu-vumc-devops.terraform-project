@@ -1,5 +1,5 @@
 resource "aws_vpc" "main" {
-  cidr_block       = "10.0.0.0/16"
+  cidr_block = "10.0.0.0/16"
 
   tags = var.tags
 }
@@ -25,7 +25,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_eip" "nat_eip" {
-  vpc      = true
+  vpc        = true
   depends_on = [aws_internet_gateway.igw]
 
   tags = var.tags

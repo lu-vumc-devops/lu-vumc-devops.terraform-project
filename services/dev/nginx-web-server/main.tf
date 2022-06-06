@@ -8,15 +8,15 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.region
-  profile = var.profile
+  region  = "us-west-2"
+  profile = "lu-vumc-devops"
 }
 
 locals {
   tags = {
-    namespace = "lu-vumc-devops"
-    stage     = "dev"
-    name      = "ec2-server"
+    Namespace = "lu-vumc-devops"
+    Stage     = "dev"
+    Name      = "nginx-web-server"
   }
 }
 
@@ -28,6 +28,11 @@ module "vpc" {
 
 module "ec2" {
   source = "../../../modules/ec2"
+
+  vpc_id        = module.vpc.vpc_id
+  cidr_block    = "0.0.0.0/0"
+  subnet_id     = module.vpc.public_subnet_id
+  instance_type = "t3.micro"
 
   tags = local.tags
 }
